@@ -1,0 +1,54 @@
+package prZoologicoDAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public abstract class AnimalDAO {
+	
+	private static Connection connection;
+	
+	//Método para insertar los datos en la bd. En este caso, se le pasa  por parámetros en objeto Animal.
+	public static void insertAnimal(Animal animal) {
+		
+		try {
+			connection = openConnection(); //Abrimos una conexion
+			
+			String query = "insert into animales (nombre, habitat, peso_aproximado) values (?, ?, ?)";
+			PreparedStatement preparedStatement = connection.prepareStatement(query); //Permite construir la sentencia sql con ?
+			preparedStatement.setString(1, animal.getNombre()); //El primer parámetro (la primera interrogación) insertamos el nombre del animal 
+			preparedStatement.setString(2, animal.getHabitat());
+			preparedStatement.setDouble(3, animal.getPeso_aproximado());
+			
+			preparedStatement.executeUpdate(); //Cuando queremos ejecutar cambios en la bd se utiliza el executeUpdate.
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		
+		closeConnection();
+	}
+	
+	//Lo primero se crea un método para abrir la bd y para cerrarla:
+	private static Connection openConnection() {
+		DatabaseConnection bdConnection = new DatabaseConnection();
+		connection = bdConnection.getConnection();
+		return connection;
+	}
+	
+	//Se crea un método para cerrar la bd:
+	private static void closeConnection() {
+		try {
+			connection.close();
+			connection = null; //Ponemos que es igual a null para cerrarla por completo, si no lo hacemos seguiría existiendo.
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+
+}
