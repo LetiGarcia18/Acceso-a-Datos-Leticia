@@ -6,8 +6,8 @@ public class Main {
 
 	public static void main(String[] args) {
 		
-		Animal a = new Animal("Ardilla", "Bosque", 0.1);
-		AnimalDAO.insertAnimal(a); //Para insertar el animal en la bd
+		//Animal a = new Animal("Ardilla", "Bosque", 0.1);
+		//AnimalDAO.insertAnimal(a); //Para insertar el animal en la bd
 		//Animal b = new Animal("Kakapoo", "Bosque", 5);
 		//AnimalDAO.insertAnimal(b);
 		
@@ -30,6 +30,9 @@ public class Main {
 		
 		System.out.println(listadoAnimales);
 		
+		Animal e = AnimalDAO.selectAnimalById(9);
+		e.setNombre("Gumersinda");
+		AnimalDAO.updateAnimal(e);
 		
 
 	}
