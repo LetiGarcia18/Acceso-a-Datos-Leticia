@@ -2,6 +2,7 @@ package prZoologicoDAO;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -9,8 +10,54 @@ public abstract class AnimalDAO {
 	
 	private static Connection connection;
 	
-	//Borrar todos los animales
-	public static void deleteAnimal() {
+	
+	//Buscar un animal por id:
+	public static Animal selectAnimalById(int id) {
+		
+		connection = openConnection();
+		
+		String query = "select * from animales where id = ?";
+		Animal animal = null;
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, id);
+			ResultSet resultSet = preparedStatement.executeQuery();
+			while (resultSet.next()) {
+				animal = new Animal(resultSet.getInt("id"), resultSet.getString("nombre"), resultSet.getString("habitat"), resultSet.getDouble("peso_aproximado"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		
+		return animal;
+	}
+	
+	
+	//Borrar un animal dado su nombre:
+	public static void deleteAnimalByNombre(String nombre) {
+		
+		connection = openConnection();
+		
+		String query = "delete from animales where nombre = ?";
+		
+		try {
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setString(1, nombre);
+			preparedStatement.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+	}
+
+	
+	//Borrar todos los animales:
+	public static void deleteAllAnimales() {
 		connection = openConnection();
 		
 		//Statement es para cuando no hay que pasarle ningún parámetro a la query
