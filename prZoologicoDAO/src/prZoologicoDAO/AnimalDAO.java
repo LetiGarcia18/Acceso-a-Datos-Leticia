@@ -5,10 +5,40 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 public abstract class AnimalDAO {
 	
 	private static Connection connection;
+	
+	//Buscar todos los animales:
+	public static ArrayList<Animal> findAllAnimales(){
+		
+		connection = openConnection();
+		
+		ArrayList<Animal> animales = new ArrayList<Animal>();
+		String query = "select * from animales";
+		Animal animal = null;
+		
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet rs = statement.executeQuery(query);
+			
+			while(rs.next()) {
+				animal = new Animal(rs.getInt("id"), rs.getString("nombre"), rs.getString("habitat"), rs.getDouble("peso_aproximado"));
+				animales.add(animal);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		closeConnection();
+		
+		
+		return animales;
+	}
 	
 	
 	//Buscar un animal por id:
