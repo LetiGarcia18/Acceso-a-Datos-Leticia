@@ -3,10 +3,31 @@ package prZoologicoDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 public abstract class AnimalDAO {
 	
 	private static Connection connection;
+	
+	//Borrar todos los animales
+	public static void deleteAnimal() {
+		connection = openConnection();
+		
+		//Statement es para cuando no hay que pasarle ningún parámetro a la query
+		//PrepareStatemen es para cuando sí que hay que pasarle parámetros a la query
+		
+		String query = "delete from animales";
+		
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		
+	}
 	
 	//Método para insertar los datos en la bd. En este caso, se le pasa  por parámetros en objeto Animal.
 	public static void insertAnimal(Animal animal) {
