@@ -2,6 +2,7 @@ package dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -58,9 +59,26 @@ public class SerieDao implements Dao<Serie>{
 	}
 
 	@Override
-	public Serie buscarPorId(int i) {
-		// TODO Auto-generated method stub
-		return null;
+	public Serie buscarPorId(int id) {
+		connection = openConnection();
+		
+		String query = "select * from series where id = ?";
+		Serie serie = null;
+		
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, id);
+			ResultSet resultSet = ps.executeQuery();
+			while (resultSet.next()) {
+				serie = new Serie(resultSet.getInt("id"), resultSet.getString("titulo"), resultSet.getInt("edad"), resultSet.getString("plataforma"), null);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+		
+		return serie;
 	}
 	
 	//Lo primero se crea un método para abrir la bd y para cerrarla:
