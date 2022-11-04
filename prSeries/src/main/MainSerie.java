@@ -30,9 +30,14 @@ public class MainSerie {
 		//serieDao.insertar(s);
 		
 		//MODIFICAMOS uNA SERIE:
-		Serie losSimpson = serieDao.buscarPorId(3);
-		losSimpson.setPlataforma("Netflix");
-		serieDao.modificar(losSimpson);
+		Serie shinchan = serieDao.buscarPorId(3);
+		//shinchan.setPlataforma("Netflix");
+		//serieDao.modificar(shinchan);
+		
+		ArrayList<Temporada> temporadasShinchan = serieDao.obtenerTemporadas(shinchan);
+		for(Temporada temporada : temporadasShinchan) {
+			System.out.println(temporada + "\n-----------------------------------------------------------------------------------");
+		}
 		
 		//BUSCAMOS TODAS LAS SERIES:
 		ArrayList<Serie> series = serieDao.buscarTodos();

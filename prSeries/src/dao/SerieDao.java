@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 import pojo.Serie;
+import pojo.Temporada;
 import util.DatabaseConnection;
 
 public class SerieDao extends ObjetoDao implements InterfazDao<Serie> {
@@ -71,10 +72,56 @@ public class SerieDao extends ObjetoDao implements InterfazDao<Serie> {
 
 	}
 
-	@Override
-	public void borrar(Serie t) {
-		// TODO Auto-generated method stub
+	public ArrayList<Temporada> obtenerTemporadas(Serie serie) {
+		ArrayList<Temporada> temporadas = new ArrayList<>();
 
+		connection = openConnection();
+
+		String query = "select * from temporadas where serie_id = ?";
+
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setInt(1, serie.getId());
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				Temporada temporada = new Temporada(rs.getInt("id"), rs.getInt("num_temporada"), rs.getString("titulo"), serie);
+				temporadas.add(temporada);
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		//closeConnection();
+		
+		return temporadas;
+
+	}
+	
+
+	@Override
+	public void borrar(Serie serie) {
+		SerieDao serieDao = new SerieDao();
+		TemporadaDao temporadaDao = new TemporadaDao();
+		try {
+			ArrayList<Temporada> temporadas =serieDao.obtenerTemporadas(serie);
+			for(Temporada temporada : temporadas) {
+				temporadaDao.borrar(temporada);
+			}
+			
+			String query = "delete from series where id = ?";
+			PreparedStatement preparedStatement = connection.prepareStatement(query);
+			preparedStatement.setInt(1, serie.getId());
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 	}
 
 	@Override
@@ -117,9 +164,9 @@ public class SerieDao extends ObjetoDao implements InterfazDao<Serie> {
 			ps.setInt(1, id);
 			ResultSet resultSet = ps.executeQuery();
 			while (resultSet.next()) {
-				serie = new Serie(resultSet.getInt("id"), resultSet.getString("titulo"), resultSet.getInt("edad"),
-						resultSet.getString("plataforma"), null);
+				serie = new Serie(resultSet.getInt("id"), resultSet.getString("titulo"), resultSet.getInt("edad"), resultSet.getString("plataforma"), null);
 			}
+			serie.setTemporadas(obtenerTemporadas(serie));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

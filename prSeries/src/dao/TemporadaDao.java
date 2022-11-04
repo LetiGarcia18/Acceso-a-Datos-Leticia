@@ -3,17 +3,18 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import pojo.Temporada;
 import util.DatabaseConnection;
 
-public class TemporadaDao implements InterfazDao<Temporada> {
-	
+public class TemporadaDao extends ObjetoDao implements InterfazDao<Temporada> {
+
 	private static Connection connection;
-	
+
 	public TemporadaDao() {
-		
+
 	}
 
 	@Override
@@ -43,10 +44,22 @@ public class TemporadaDao implements InterfazDao<Temporada> {
 	}
 
 	@Override
-	public void borrar(Temporada t) {
-		// TODO Auto-generated method stub
+	public void borrar(Temporada temporada) {
+		connection = openConnection();
 
+		String query = "delete from temporadas where id =" + temporada.getId();
+
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(query);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
 	}
+
+	
 
 	@Override
 	public ArrayList<Temporada> buscarTodos() {
@@ -59,24 +72,5 @@ public class TemporadaDao implements InterfazDao<Temporada> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	//Lo primero se crea un método para abrir la bd y para cerrarla:
-			private static Connection openConnection() {
-				DatabaseConnection bdConnection = new DatabaseConnection();
-				connection = bdConnection.getConnection();
-				return connection;
-			}
-			
-			//Se crea un método para cerrar la bd:
-			private static void closeConnection() {
-				try {
-					connection.close();
-					connection = null; //Ponemos que es igual a null para cerrarla por completo, si no lo hacemos seguiría existiendo.
-				} catch (SQLException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-				
-			}
 
 }
