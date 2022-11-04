@@ -14,8 +14,8 @@ public interface InterfazDao<T>{
 	 */
 	public void modificar(T t);
 	/**
-	 * Elimina un objeto T de la base de datos.
-	 * @param t Un objeto T.
+	 * Elimina un objeto T de la base de datos
+	 * @param t
 	 */
 	public void borrar(T t);
 	/**
