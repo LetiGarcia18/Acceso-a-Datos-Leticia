@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import pojo.Serie;
 import util.DatabaseConnection;
 
-public class SerieDao implements Dao<Serie>{
+public class SerieDao implements InterfazDao<Serie>{
 	
 	private static Connection connection;
 	

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import pojo.Temporada;
 import util.DatabaseConnection;
 
-public class TemporadaDao implements Dao<Temporada> {
+public class TemporadaDao implements InterfazDao<Temporada> {
 	
 	private static Connection connection;
 	
