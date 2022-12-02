@@ -11,5 +11,6 @@
         <property name="hibernate.default_schema">bd_zoologico</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
         <mapping class="pojo.Animal"/>
+        <mapping class="pojo.Zoologicos"/>
     </session-factory>
 </hibernate-configuration>
