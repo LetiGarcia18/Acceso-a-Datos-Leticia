@@ -14,7 +14,7 @@ public class MainSerie {
 		
 		//Serie serie = new Serie("Los Simpson", 7, "Disney Plus");
 		//Serie serie2 = new Serie(2, "Shinchan", 7, "Neox", null);
-		//SerieDao serieDao = new SerieDao();
+		SerieDao serieDao = new SerieDao();
 		//serieDao.insertar(serie);
 		//serieDao.insertar(serie2);
 		//System.out.println(serieDao.buscarPorId(3));
@@ -40,22 +40,25 @@ public class MainSerie {
 		}*/
 		
 		//BUSCAMOS TODAS LAS SERIES:
-		/*ArrayList<Serie> series = serieDao.buscarTodos();
-		String todasSeries = "";
+		ArrayList<Serie> series = serieDao.buscarTodos();
+		/*String todasSeries = "";
 		for(int i = 0; i < series.size(); i++) {
 			todasSeries += series.get(i) + "\n";
 		}
 		System.out.println(todasSeries + "\n------------------------------------------------------------------------------------\n");*/
 		
 		//EL MISMO BUCLE PARA IMPRIMIR EL ARRAYLIST PERO HECHO CON foreach:
-		/*for (Serie serie : series) {
-			System.out.println(serie.getTitulo());
-		}*/
+		for (Serie serie : series) {
+			System.out.println("SERIE: " + serie.getTitulo());
+			for (Temporada temporada : serie.getTemporadas()) {
+				System.out.println("TEMPORADA: " + temporada.getTitulo());
+			}
+		}
 		
-		SerieDao serieDao = new SerieDao();
-		TemporadaDao temporadaDao = new TemporadaDao();
+		//SerieDao serieDao = new SerieDao();
+		//TemporadaDao temporadaDao = new TemporadaDao();
 		
-		Serie s = serieDao.buscarPorId(3);
+		//Serie s = serieDao.buscarPorId(3);
 		/*
 		Temporada t1 = new Temporada(1, "The Mandalorian season 1", s);
 		Temporada t2 = new Temporada(2, "The Mandalorian season 2", s);
@@ -66,7 +69,7 @@ public class MainSerie {
 		
 		//temporadaDao.borrarPorSerie(9);
 		
-		serieDao.borrar(s);
+		//serieDao.borrar(s);
 		
 		
 
