@@ -10,26 +10,27 @@ public class Animal {
 	private String tipoAnimal;
 	private boolean esDomestico;
 	private boolean enPeligroDeExtincion;
-	private ArrayList<Raza> razas;
+	private Raza raza;
 	
 
-	public Animal(String nombreComun, String nombreCientifico, String tipoAnimal, boolean esDomestico, boolean enPeligroDeExtincion) {
+	public Animal(String nombreComun, String nombreCientifico, String tipoAnimal, boolean esDomestico, boolean enPeligroDeExtincion, Raza raza) {
 		this.nombreComun = nombreComun;
 		this.nombreCientifico = nombreCientifico;
 		this.tipoAnimal = tipoAnimal;
 		this.esDomestico = esDomestico;
 		this.enPeligroDeExtincion = enPeligroDeExtincion;
+		this.raza = raza;
 	}
 
 
-	public Animal(int id, String nombreComun, String nombreCientifico, String tipoAnimal, boolean esDomestico, boolean enPeligroDeExtincion, ArrayList<Raza> razas) {
+	public Animal(int id, String nombreComun, String nombreCientifico, String tipoAnimal, boolean esDomestico, boolean enPeligroDeExtincion, Raza raza) {
 		this.id = id;
 		this.nombreComun = nombreComun;
 		this.nombreCientifico = nombreCientifico;
 		this.tipoAnimal = tipoAnimal;
 		this.esDomestico = esDomestico;
 		this.enPeligroDeExtincion = enPeligroDeExtincion;
-		this.razas = razas;
+		this.raza = raza;
 	}
 
 
@@ -93,13 +94,13 @@ public class Animal {
 	}
 
 
-	public ArrayList<Raza> getRazas() {
-		return razas;
+	public Raza getRaza() {
+		return raza;
 	}
 
 
-	public void setRazas(ArrayList<Raza> razas) {
-		this.razas = razas;
+	public void setRaza(Raza raza) {
+		this.raza = raza;
 	}
 
 
@@ -108,16 +109,14 @@ public class Animal {
 		String domestico = "";
 		
 		if(esDomestico) {
-			domestico = "Sí";
+			domestico = "Si";
 		}else {
 			domestico = "No";
 		}
 		
-		return "Animal --> \nid: " + id + "\nNombre común: " + nombreComun + "\nNombre científico: " + nombreCientifico
-				+ "\nTipo animal: " + tipoAnimal + "\nEs doméstico: " + domestico + "\nEn peligro de extincion: "
-				+ enPeligroDeExtincion;
+		return "Animal --> \nid: " + id + "\nNombre comï¿½n: " + nombreComun + "\nNombre cientï¿½fico: " + nombreCientifico
+				+ "\nTipo animal: " + tipoAnimal + "\nEs domï¿½stico: " + domestico + "\nEn peligro de extincion: "
+				+ enPeligroDeExtincion + "\nNombre raza: " + raza.getNombre();
 	}
-	
-	
 
 }

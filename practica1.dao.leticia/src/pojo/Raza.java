@@ -1,27 +1,35 @@
 package pojo;
 
+import java.util.ArrayList;
+
 public class Raza {
 	
 	private int id;
 	private String nombre;
 	private String habitat;
 	private boolean esPeligrosa;
-	private Animal animal;
+	private ArrayList<Animal> animales;
 	
-	public Raza(String nombre, String habitat, boolean esPeligrosa, Animal animal) {
+	public Raza(String nombre, String habitat, boolean esPeligrosa) {
 		this.nombre = nombre;
 		this.habitat = habitat;
 		this.esPeligrosa = esPeligrosa;
-		this.animal = animal;
 	}
 
 
-	public Raza(int id, String nombre, String habitat, boolean esPeligrosa, Animal animal) {
+	public Raza(int id, String nombre, String habitat, boolean esPeligrosa, ArrayList<Animal> animales) {
 		this.id = id;
 		this.nombre = nombre;
 		this.habitat = habitat;
 		this.esPeligrosa = esPeligrosa;
-		this.animal = animal;
+		this.animales = animales;
+	}
+	
+	public Raza(int id, String nombre, String habitat, boolean esPeligrosa) {
+		this.id = id;
+		this.nombre = nombre;
+		this.habitat = habitat;
+		this.esPeligrosa = esPeligrosa;
 	}
 
 
@@ -64,14 +72,14 @@ public class Raza {
 		this.esPeligrosa = esPeligrosa;
 	}
 
-
-	public Animal getAnimal() {
-		return animal;
+	
+	public ArrayList<Animal> getAnimales() {
+		return animales;
 	}
 
 
-	public void setAnimal(Animal animal) {
-		this.animal = animal;
+	public void setAnimales(ArrayList<Animal> animales) {
+		this.animales = animales;
 	}
 
 
@@ -80,13 +88,12 @@ public class Raza {
 		String peligrosa = "";
 		
 		if(esPeligrosa) {
-			peligrosa = "Sí";
+			peligrosa = "Si";
 		}else {
 			peligrosa = "No";
 		}
 		
-		return "Raza --> \nid: " + id + "\nNombre: " + nombre + "\nHabitat: " + habitat + "\nEs peligrosa: " + peligrosa
-				+ "\nAnimal: " + animal.getNombreComun();
+		return "Raza --> \nid: " + id + "\nNombre: " + nombre + "\nHabitat: " + habitat + "\nEs peligrosa: " + peligrosa;
 	}
 	
 	
