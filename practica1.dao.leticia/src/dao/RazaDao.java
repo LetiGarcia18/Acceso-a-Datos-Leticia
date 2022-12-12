@@ -43,17 +43,17 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 		connection = openConnection();
 
 		int id = raza.getId();
-		String nombre = raza.getNombre();
-		String habitat = raza.getHabitat();
-		boolean esPeligrosa = raza.isEsPeligrosa();
+		String nuevoNombre = raza.getNombre();
+		String nuevoHabitat = raza.getHabitat();
+		boolean nuevoEsPeligrosa = raza.isEsPeligrosa();
 
 		String query = "update razas set nombre = ?, habitat = ?, esPeligrosa = ? where id = ?";
 
 		try {
 			PreparedStatement ps = connection.prepareStatement(query);
-			ps.setString(1, raza.getNombre());
-			ps.setString(2, raza.getHabitat());
-			ps.setBoolean(3, raza.isEsPeligrosa());
+			ps.setString(1, nuevoNombre);
+			ps.setString(2, nuevoHabitat);
+			ps.setBoolean(3, nuevoEsPeligrosa);
 			ps.setInt(4, id);
 
 			ps.executeUpdate();
@@ -118,7 +118,7 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 				ResultSet rs_animales = ps_animales.executeQuery();
 				
 				while(rs_animales.next()) {
-					Animal animal = new Animal(rs.getInt("id"), rs.getString("nombreComun"), rs.getString("nombreCientifico"), rs.getString("tipoAnimal"), rs.getBoolean("esDomestico"), rs.getBoolean("enPeligroDeExtincion"), raza);
+					Animal animal = new Animal(rs_animales.getInt("id"), rs_animales.getString("nombreComun"), rs_animales.getString("nombreCientifico"), rs_animales.getString("tipoAnimal"), rs_animales.getBoolean("esDomestico"), rs_animales.getBoolean("enPeligroDeExtincion"), raza);
 					animales.add(animal);
 				}
 
@@ -150,6 +150,32 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
 			while (rs.next()) {
 				raza = new Raza(rs.getInt("id"), rs.getString("nombre"), rs.getString("habitat"), rs.getBoolean("esPeligrosa"));
+				raza.setAnimales(obtenerAnimales(raza));
+			}
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		closeConnection();
+
+		return raza;
+	}
+	
+	
+	public Raza buscarPorNombre(String nombre) {
+		connection = openConnection();
+
+		String query = "select * from razas where nombre = ?";
+		Raza raza = null;
+
+		try {
+			PreparedStatement ps = connection.prepareStatement(query);
+			ps.setString(1, nombre);
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+				raza = new Raza(rs.getInt("id"), rs.getString("nombre"), rs.getString("habitat"), rs.getBoolean("esPeligrosa"));
 			}
 
 			raza.setAnimales(obtenerAnimales(raza));
@@ -161,6 +187,7 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
 		return raza;
 	}
+	
 
 	public ArrayList<Animal> obtenerAnimales(Raza raza) {
 		ArrayList<Animal> animales = new ArrayList<>();

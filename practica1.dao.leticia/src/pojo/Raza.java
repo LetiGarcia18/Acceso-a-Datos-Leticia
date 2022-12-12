@@ -93,7 +93,7 @@ public class Raza {
 			peligrosa = "No";
 		}
 		
-		return "Raza --> \nid: " + id + "\nNombre: " + nombre + "\nHabitat: " + habitat + "\nEs peligrosa: " + peligrosa;
+		return "Raza --> id: " + id + " - Nombre: " + nombre + " - Habitat: " + habitat + " - Es peligrosa: " + peligrosa;
 	}
 	
 	

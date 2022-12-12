@@ -114,9 +114,9 @@ public class Animal {
 			domestico = "No";
 		}
 		
-		return "Animal --> \nid: " + id + "\nNombre com�n: " + nombreComun + "\nNombre cient�fico: " + nombreCientifico
-				+ "\nTipo animal: " + tipoAnimal + "\nEs dom�stico: " + domestico + "\nEn peligro de extincion: "
-				+ enPeligroDeExtincion + "\nNombre raza: " + raza.getNombre();
+		return "Animal --> id: " + id + " - Nombre común: " + nombreComun + " - Nombre científico: " + nombreCientifico
+				+ " - Tipo animal: " + tipoAnimal + " - Es doméstico: " + domestico + " - En peligro de extincion: "
+				+ enPeligroDeExtincion + " - Nombre raza: " + raza.getNombre();
 	}
 
 }

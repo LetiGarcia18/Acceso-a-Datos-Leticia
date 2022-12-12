@@ -8,7 +8,7 @@ public class DatabaseConnection {
 Connection connection;
 	
 	public Connection getConnection() {
-		String bdName = "bd_animales";
+		String bdName = "bd_animales_razas";
 		String userName = "root";
 		String password = "Midna1993";
 		
