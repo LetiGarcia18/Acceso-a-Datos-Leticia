@@ -5,19 +5,19 @@ import java.sql.SQLException;
 
 import util.DatabaseConnection;
 /**
- * Clase padre donde se van a declarar m閠odos comunes para las clases hijas que hereden de ella.
+ * Clase padre donde se van a declarar m茅todos comunes para las clases hijas que hereden de ella.
  * @author Leticia
  *
  */
 public class ObjetoDao {
 	/**
-	 * Variable interna privada, de tipo Connection que representa la conexi髇 a la base de datos.
+	 * Variable interna privada, de tipo Connection que representa la conexi贸n a la base de datos.
 	 */
 	private static Connection connection;
 
 	/**
-	 * M閠odo que abre la conexi髇 con la base de datos.
-	 * @return Devuelve la conexi髇.
+	 * M茅todo que abre la conexi贸n con la base de datos.
+	 * @return Devuelve la conexi贸n.
 	 */
 	protected static Connection openConnection() {
 		DatabaseConnection bdConnection = new DatabaseConnection();
@@ -26,7 +26,7 @@ public class ObjetoDao {
 	}
 
 	/**
-	 * M閠odo que cierra la conexi髇 con la base de datos.
+	 * M茅todo que cierra la conexi贸n con la base de datos.
 	 */
 	protected static void closeConnection() {
 		try {

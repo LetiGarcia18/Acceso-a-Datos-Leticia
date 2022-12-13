@@ -10,14 +10,29 @@ import java.util.ArrayList;
 import pojo.Animal;
 import pojo.Raza;
 
+/**
+ * Clase RazaDao que representa el dao de la clase Raza. Hereda de la clase ObjetoDao e implementa de la interfaz InterfazDao<Raza>
+ * @author Leticia
+ *
+ */
 public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
+	/**
+	 * Variable interna de tipo Connection que representa la conexión.
+	 */
 	private static Connection connection;
 
+	/**
+	 * Constructor vacío
+	 */
 	public RazaDao() {
 
 	}
 
+	/**
+	 * Función que inserta un objeto Raza a la base de datos. No devuelve nada.
+	 * @param Raza raza Se le pasa por parámetros la raza que se quiere insertar 
+	 */
 	@Override
 	public void insertar(Raza raza) {
 		connection = openConnection();
@@ -38,6 +53,10 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
 	}
 
+	/**
+	 * Función que modifica una raza de la base de datos.
+	 * @param Raza raza Se le pasa por parámetros la raza que se quiere modificar
+	 */
 	@Override
 	public void modificar(Raza raza) {
 		connection = openConnection();
@@ -67,6 +86,10 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
 	}
 
+	/**
+	 * Función que borra una raza de la base de datos
+	 * @param Raza raza Se le pasa por parámetros la raza que se quiere borrar
+	 */
 	@Override
 	public void borrar(Raza raza) {
 		int raza_id = raza.getId();
@@ -92,6 +115,10 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 
 	}
 
+	/**
+	 * Función que busca todas las razas en la base de datos. No se le pasa nada por parámetros.
+	 * @return Devuelve un ArrayList con todas las razas
+	 */
 	@Override
 	public ArrayList<Raza> buscarTodos() {
 		connection = openConnection();
@@ -123,7 +150,6 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 				}
 
 				raza.setAnimales(animales); 
-				//En este punto, la serie está completa.
 				razas.add(raza);
 			}
 		} catch (SQLException e) {
@@ -136,6 +162,11 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 		return razas;
 	}
 
+	/**
+	 * Función que busca una raza en base de datos mediante su id.
+	 * @param int id Se le pasa por parámetros el id de la raza que se quiere buscar
+	 * @return Devuelve la raza
+	 */
 	@Override
 	public Raza buscarPorId(int id) {
 		connection = openConnection();
@@ -162,7 +193,11 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 		return raza;
 	}
 	
-	
+	/**
+	 * Función que busca una raza en base de datos mediante el nombre
+	 * @param nombre Se le pasa por parámetros el nombre de la raza que se quiere buscar
+	 * @return Devuelve la raza que se busca
+	 */
 	public Raza buscarPorNombre(String nombre) {
 		connection = openConnection();
 
@@ -189,6 +224,11 @@ public class RazaDao extends ObjetoDao implements InterfazDao<Raza> {
 	}
 	
 
+	/**
+	 * Función que obtiene los animales de una raza
+	 * @param raza Se le pasa por parámetros la raza de la que se quiere obtener los animales
+	 * @return Devuelve un ArrayList de animales
+	 */
 	public ArrayList<Animal> obtenerAnimales(Raza raza) {
 		ArrayList<Animal> animales = new ArrayList<>();
 

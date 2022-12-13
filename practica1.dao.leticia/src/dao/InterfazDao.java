@@ -2,6 +2,12 @@ package dao;
 
 import java.util.ArrayList;
 
+/**
+ * Interfaz que contiene métodos para implementarlos en las clases dao.
+ * @author Leticia
+ *
+ * @param <T> Objeto T
+ */
 public interface InterfazDao<T> {
 	
 	/**
